@@ -1,7 +1,3 @@
-# Usage:
-#   Normal: python scrollingLrg.py "title txt" "scrolling text"
-#   With night_mode: python scrollingLrg.py "title txt" "scrolling text" true
-
 import sys
 import board
 import digitalio

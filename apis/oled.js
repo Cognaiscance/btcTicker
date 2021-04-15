@@ -4,8 +4,8 @@ module.exports = {
   demo: () => execPythonScript({
     scriptName: 'demo.py'
   }),
-  scrollingLrg: ({ title = defaultTitle, text = ""}) => execPythonScript({
-    scriptName: 'scrollingLrg.py',
+  scrolling: ({ title = defaultTitle, text = ""}) => execPythonScript({
+    scriptName: 'scrolling.py',
     args: `"${title}" "${text}" ${useNightMode()} ${scrollSpeed} ${fontSize}`,
   }),
   fixedTwoRows: ({ title = defaultTitle, r1Text = "", r2Text = ""}) => execPythonScript({
