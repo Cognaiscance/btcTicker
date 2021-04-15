@@ -14,6 +14,12 @@ const fetch = async () => {
     })
     console.log(results)
   }
+  console.log('Starting fixedTwoRows')
+  const results = await oled.fixedTwoRows({
+    r1Text: "BTC:",
+    r2Text: getFormattedQuote(data.BTC),
+  })
+  console.log(results)
 }
 
 fetch()
