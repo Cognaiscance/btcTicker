@@ -22,13 +22,9 @@ HEIGHT = 64
 BGFILL = 0 if night_mode else 255
 FGFILL = 255 if night_mode else 0
 
-# Use for I2C.
+# Define I2c
 i2c = board.I2C()
-oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x3C, reset=None)
- 
-# Clear display.
-oled.fill(FGFILL)
-oled.show()
+oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, i2c, addr=0x3C)
  
 # Create blank image for drawing.
 # Make sure to create image with mode '1' for 1-bit color.
@@ -41,11 +37,11 @@ draw = ImageDraw.Draw(image)
 draw.rectangle((-1, -1, oled.width, oled.height), outline=BGFILL, fill=BGFILL)
  
 #header font
-hfont = ImageFont.truetype("fonts/AtariClassic-gry3.ttf", 14)
+hfont = ImageFont.truetype("fonts/AtariClassic-gry3.ttf", 10)
 
 # Draw header text
 draw.text(
-    (5,0),
+    (5,2),
     title_text,
     font=hfont,
     fill=FGFILL,
