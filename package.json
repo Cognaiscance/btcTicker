@@ -1,0 +1,15 @@
+{
+  "name": "ticker",
+  "version": "1.0.0",
+  "description": "fetches prices for coins and stocks (to put them out to the ticker screen)",
+  "main": "btcTicker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "William Frazier",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "request-promise": "^4.2.6"
+  }
+}
