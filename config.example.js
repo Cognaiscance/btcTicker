@@ -4,10 +4,11 @@ module.exports = {
     symbols: ['btc', 'ltc'],
   },
   oled: {
+    title: "BTC Ticker",
     fontSize: 18,
-    scrollSpeed: 3, // 0 - 10 -> (slow) - (fast)
+    scrollSpeed: 2, // 1 - 3: (slowest) - (fastest)
     nightMode: "daylight", // "off", "on", "daylight"
-    timezoneOffset: -5, // used to calculate daylight setting for nightMode
+    timezoneOffset: -6, // used to calculate daylight setting for nightMode
     startNightHour: 19, // hour in military time to start using nightMode
     endNightHour: 7,
   },
