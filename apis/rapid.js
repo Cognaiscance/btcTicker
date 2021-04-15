@@ -1,11 +1,37 @@
-const request = require('request-promise');
+var unirest = require("unirest");
 
 const { rapid: { apiKey, symbols } } = require('../config')
 console.log(apiKey)
 console.log(symbols.join(', '))
 
 module.exports = {
-  quotes: () => request({
+  quotes: () => {
+    var req = unirest("GET", "https://twelve-data1.p.rapidapi.com/quote");
+
+    req.query({
+      "symbol": "AMZN",
+      "interval": "5min",
+      "format": "json",
+      "outputsize": "30"
+    });
+
+    req.headers({
+      "x-rapidapi-key": "d2778969bbmsh06e0d6d8671dfdbp1ec548jsn6baa55757038",
+      "x-rapidapi-host": "twelve-data1.p.rapidapi.com",
+      "useQueryString": true
+    });
+
+    return new Promise((resolve, reject) => {
+      req.end(function (res) {
+        if (res.error) {
+          return reject(res.error)
+        }
+        resolve(res.body)
+      })
+    })
+    
+  },
+  quotes1: () => request({
     method: 'GET',
     uri: 'https://twelve-data1.p.rapidapi.com/quote',
     qs: {
