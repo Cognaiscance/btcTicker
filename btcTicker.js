@@ -10,7 +10,6 @@ const fetch = async () => {
   for (const [key, value] of Object.entries(data)) {
     console.log('Starting ticker run.')
     const results = await oled.scrollingLrg({
-      title: 'BTC Pi4',
       text: `${value.symbol}: ${getFormattedQuote(value)}`,
     })
     console.log(results)
