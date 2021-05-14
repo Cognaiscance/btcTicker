@@ -4,6 +4,7 @@ const oled = require('./apis/oled')
 const {
   rapid: { symbols: rapidSymbols },
   oled: { displayScript },
+  ticker: { iterations_per_lookup, fixedTwoRowsDelay },
 } = require('./config')
 
 function delay(ms) {
@@ -41,26 +42,34 @@ const getRapidTickerData = async () => Promise.all(
   })
 )
   
-const main = async () => {
-  // gather all ticker data
-  const tickerData = [
-    ...await getCoinTickerData(),
-    ...await getRapidTickerData()
-  ]
-
-  // set it to cycle through the 
-  if (displayScript === 'scrolling') {
-    while(true) {
-      for (var i = 0; i < tickerData.length; i++) {
-        await oled.scrolling(tickerData[i])
-      }
+const scrollRepeater = async (tickerData) => {
+  for (var x = 0; x < iterations_per_lookup; x++) {
+    for (var i = 0; i < tickerData.length; i++) {
+      await oled.scrolling(tickerData[i])
     }
-  } else if (displayScript === 'fixedTwoRows') {
-    while(true) {
-      for (var i = 0; i < tickerData.length; i++) {
-        await oled.fixedTwoRows(tickerData[i])
-        await delay(5000)
-      }
+  }
+}
+
+const fixedRepeater = async (tickerData) => {
+  for (var x = 0; x < iterations_per_lookup; x++) {
+    for (var i = 0; i < tickerData.length; i++) {
+      await oled.fixedTwoRows(tickerData[i])
+      await delay(fixedTwoRowsDelay)
+    }
+  }
+}
+
+const main = async () => {
+  while(true) {
+    tickerData = [
+      ...await getCoinTickerData(),
+      ...await getRapidTickerData(),
+    ]
+
+    if (displayScript === 'scrolling') {
+      await scrollRepeater(tickerData)
+    } else if (displayScript === 'fixedTwoRows') {
+      await fixedRepeater(tickerData)
     }
   }
 }
